@@ -1,3 +1,5 @@
+import './app.scss';
+
 window.contentfulExtension.init(function (extension) {
   var value = extension.field.getValue();
   var inputField = document.getElementsByClassName('input-text')[0];
