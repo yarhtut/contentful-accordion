@@ -1,6 +1,6 @@
 {
   "id": "boost-accordian",
   "name": "Boost accordion",
-  "srcdoc": "./dist/app.html",
+  "srcdoc": "./index.html",
   "fieldTypes": ["Text"]
 }

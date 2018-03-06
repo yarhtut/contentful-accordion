@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+<head>
+  <meta name="viewport" charset='UTF-8' content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://contentful.github.io/ui-extensions-sdk/cf-extension.css" type="text/css">
+  <style>
+    body {
+      min-height: 140px;
+      font-size: 16px;
+      color: #2a3039;
+      font-family: "Avenir Next W01", Helvetica, sans-serif;
+    }
+
+    .accordion {
+      background-color: #f7f9fa;
+      border: none;
+      font-size: 16px;
+      border-bottom: 1px solid #d3dce0;
+      color: #8091a5;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      text-align: left;
+      outline: none;
+      transition: 0.4s;
+    }
+
+    .active, .accordion:hover {
+    }
+
+    .accordion:after {
+      content: '\002B';
+      color: #777;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+    .input-text {
+      font-size: 16px;
+      color: #2a3039;
+      font-family: "Avenir Next W01", Helvetica, sans-serif;
+      display: block;
+      width: 100%;
+      line-height: 1.5;
+      outline: 0;
+      padding: 0 2px;
+      background-color: transparent;
+      border-width: 0 0 1px 0;
+      border-style: solid;
+      border-color: transparent;
+      border-image-width: 0 0 1px 0;
+      border-image-source: url(https://static.contentful.com/app/svg/dotted-border.svg);
+      border-image-repeat: round;
+      border-image-slice: 1 1;
+      -webkit-transition: 0.2s linear;
+      -moz-transition: 0.2s linear;
+      -o-transition: 0.2s linear;
+      -ms-transition: 0.2s linear;
+      transition: 0.2s linear;
+      -webkit-transition-property: padding, background-color;
+      -moz-transition-property: padding, background-color;
+      -o-transition-property: padding, background-color;
+      -ms-transition-property: padding, background-color;
+      transition-property: padding, background-color;
+      height: 5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="accordion">Accodian Heading Text</button>
+
+  <div class="panel">
+    <input type='text' class='input-text'>
+  </div>
+
+  <script src="https://contentful.github.io/ui-extensions-sdk/cf-extension-api.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    window.contentfulExtension.init(function (extension) {
+      var value = extension.field.getValue();
+      var inputField = document.getElementsByClassName('input-text')[0];
+      inputField.value = value;
+
+      inputField.addEventListener('keyup', function(e) {
+        e.preventDefault();
+        setTimeout(function () {
+          extension.field.setValue(e.target.value)
+        }, 1000)
+      })
+    })
+
+    var acc = document.getElementsByClassName("accordion");
+
+    acc[0].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight){
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    })
+  </script>
+</body>
+</html>
